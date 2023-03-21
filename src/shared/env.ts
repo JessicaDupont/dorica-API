@@ -1,7 +1,7 @@
 export const ENV = {
-    "port" : process.env.PORT ?? process.env.LOCAL_PORT ?? "3000",
+    "port" : process.env.PORT ?? process.env.LOCAL_PORT ?? 3000,
     "DB" : {
-        "host": process.env.DB_HOST ?? process.env.LOCAL_DB_HOST_LOCAL ?? "127.0.0.1",
+        "host": process.env.DB_HOST ?? process.env.LOCAL_DB_HOST ?? "127.0.0.1",
         "port": parseInt(process.env.DB_PORT ?? process.env.LOCAL_DB_PORT ?? "3306", 10),
         "username": process.env.DB_USERNAME ?? process.env.LOCAL_DB_USERNAME ?? "doricapi",
         "password": process.env.DB_PASSWORD ?? process.env.LOCAL_DB_PASSWORD ?? "dorica",
