@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { MysqlModule } from './shared/data/mysql/mysql.module';
 
 @Module({
-  imports: [],
+  imports: [MysqlModule],
   controllers: [],
   providers: [],
 })
