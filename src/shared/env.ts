@@ -5,7 +5,7 @@ export const ENV = {
         "port": parseInt(process.env.DB_PORT ?? process.env.LOCAL_DB_PORT ?? "3306", 10),
         "username": process.env.DB_USERNAME ?? process.env.LOCAL_DB_USERNAME ?? "doricapi",
         "password": process.env.DB_PASSWORD ?? process.env.LOCAL_DB_PASSWORD ?? "dorica",
-        "name": process.env.DB_NAME ?? process.env.LOCAL_DB_NAME ?? "dorica"
+        "database": process.env.DB_NAME ?? process.env.LOCAL_DB_NAME ?? "dorica"
     },
     "JWT" : {
         "user" : process.env.JWT_SECRET_KEY_USER
@@ -13,15 +13,15 @@ export const ENV = {
     "MAIL" : {
         "SMTP" : {
             "serveur" : process.env.MAIL_SMTP_SERVEUR,
-            "port" : process.env.MAIL_SMTP_PORT_SECURE ?? process.env.MAIL_SMTP_PORT
+            "port" : parseInt(process.env.MAIL_SMTP_PORT_SECURE ?? process.env.MAIL_SMTP_PORT, 10)
         },
         "IMAP" : {
             "serveur" : process.env.MAIL_IMAP_SERVEUR,
-            "port" : process.env.MAIL_IMAP_PORT_SECURE ?? process.env.MAIL_IMAP_PORT
+            "port" : parseInt(process.env.MAIL_IMAP_PORT_SECURE ?? process.env.MAIL_IMAP_PORT, 10)
         },
         "POP3" : {
             "serveur" : process.env.MAIL_POP3_SERVEUR,
-            "port" : process.env.MAIL_POP3_PORT_SECURE ?? process.env.MAIL_POP3_PORT
+            "port" : parseInt(process.env.MAIL_POP3_PORT_SECURE ?? process.env.MAIL_POP3_PORT, 10)
         },
         "USER" : {
             "NOREPLY" : {

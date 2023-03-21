@@ -29,18 +29,6 @@
 ### 1.4.1. MySQL
 1. `npm i --save @nestjs/typeorm typeorm mysql2`
 2. dans `doric-api/src/app.module.ts`, dans `imports`
-    ```ts
-    TypeOrmModule.forRoot({
-        type: 'mysql',
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT, 10),
-        username: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        entities: [],
-        synchronize: true,//mettre a false en prod
-    }),
-    ```
 3. pour chaque module utilisant la DB, ajouter dans `imports`
     ```ts
     TypeOrmModule.forFeature([/*nom du modele*/])
