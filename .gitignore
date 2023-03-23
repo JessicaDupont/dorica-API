@@ -1,4 +1,5 @@
 .env 
+src/shared/env.ts
 
 # compiled output
 /dist

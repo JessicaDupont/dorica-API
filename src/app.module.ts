@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { MysqlModule } from './shared/data/mysql/mysql.module';
+import { UsersModule } from './_users/_users.module';
+import { MysqlModule } from './data/mysql/mysql.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
-  imports: [MysqlModule],
+  imports: [MysqlModule, UsersModule, MailModule],
   controllers: [],
   providers: [],
 })

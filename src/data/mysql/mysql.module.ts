@@ -11,8 +11,10 @@ import { ENV } from 'src/shared/env';
             username: ENV.DB.username,
             password: ENV.DB.password,
             database: ENV.DB.database,
-            entities: [],
+            entities: [__dirname + "/**/*.entity.{ts, js}"],
+            autoLoadEntities: true,//uniquement la première fois, sinon écrase
             synchronize: true,//mettre a false en prod
+            //logging: "all"//affiche les requetes envoyée en DB dans la console
         }),]
 })
 export class MysqlModule { }
