@@ -10,9 +10,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, SwaggerConfig);
   SwaggerModule.setup('', app, document);
 
-  console.log("http://localhost:"+ENV.port);
-  console.log("Documentation swagger.json : http://localhost:"+ENV.port+"/-json");
+  console.log("test", ENV.KEY.user);
+  console.log("http://localhost:"+ENV.SERVER.port);
+  console.log("Documentation swagger.json : http://localhost:"+ENV.SERVER.port+"/-json");
 
-  await app.listen(ENV.port);
+  await app.listen(ENV.SERVER.port);
 }
 bootstrap();

@@ -12,7 +12,7 @@ import { HttpResponses } from 'src/shared/content/httpResponses/httpResponses';
 import { MailService } from 'src/mail/mail.service';
 import { UserDTO } from '../models/dto/users/user.dto';
 import { UserTokenDTO } from '../models/dto/users/token.dto';
-import { ENV } from 'src/shared/env';
+import { AuthService } from 'src/middlewares/auth/auth.service';
 
 @Injectable()
 export class UsersService {
@@ -20,7 +20,8 @@ export class UsersService {
 
     constructor(
         @InjectRepository(UserEntity) private userR: Repository<UserEntity>,
-        private readonly mailS: MailService
+        private readonly mailS: MailService,
+        private readonly authS:AuthService
     ) { }
 
     /**
@@ -100,8 +101,20 @@ export class UsersService {
     getMe(ip: string): UserDTO {
         throw new Error('Method not implemented.');
     }
-    connect(ip: string, user: UserConnectDTO): UserTokenDTO {
-        throw new Error('Method not implemented.');
+    async connect(ip: string, user: UserConnectDTO): Promise<UserTokenDTO> {
+        let userE:UserEntity;
+        switch (await this.existByEmail(user.email)) {
+            case true:
+                userE = await this.read1ByEmail(user.email);
+                if(await bcrypt.compare(user.password, userE.password)){
+                    userE.lastConnexion = new Date();
+                    await this.update(userE);
+                    return await this.authS.login(userE);
+                }
+            case false:
+            default:
+                return this.httpRes.userNotFound(user.email);
+        }
     }
     async validate(ip: string, email: string, code: number) {
         let userE:UserEntity;
@@ -132,7 +145,7 @@ export class UsersService {
                     userE.createdAt = new Date();
                     userE.emailIsValidate = false;
                     userE.lastConnexion = null;
-                    userE.password = await bcrypt.hash(user.password, 10);
+                    userE.password = await this.securePassword(user.password)
                     userE.profilIsRestricted = false;
                     userE.role = UserRoleEnum.USER;
                     await this.update(userE);
@@ -143,7 +156,7 @@ export class UsersService {
             case null://création
             default:
                 try {
-                    user.password = await bcrypt.hash(user.password, 10);
+                    user.password = await this.securePassword(user.password)
                     await this.create(user);
                     userE = await this.read1ByEmail(user.email);
                 } catch (error) {
@@ -158,6 +171,9 @@ export class UsersService {
         )
         //return success
         return this.httpRes.userCreated(userE.email);
+    }
+    private async securePassword(password:string):Promise<string>{
+        return await bcrypt.hash(password, 10);
     }
     private codeValidation(user: UserEntity): number {
         return user.createdAt.getTime() % 100000;

@@ -13,7 +13,7 @@ export class MailsFR implements IMails{
             +"\nAfin de pouvoir bénéficier des informations de l'API, "
             +"veuillez confirmer votre adresse email en cliquant sur le lien ci-dessous "
             +"(ou en le copiant dans votre navigateur): "
-            +"\n"+ENV.domain+"/users/"+ToolConvert.emailToPath(email)+"/"+code
+            +"\n"+ENV.SERVER.domain+"/users/"+ToolConvert.emailToPath(email)+"/"+code
             +"\nBon jeu!"
             +"\nMiss Ica",
             html: "<h1>Bienvenue sur DoricAPI,</h1> "
@@ -21,8 +21,8 @@ export class MailsFR implements IMails{
             +"<p>Afin de pouvoir bénéficier des informations de l'API, "
             +"veuillez confirmer votre adresse email en cliquant sur le lien ci-dessous "
             +"(ou en le copiant dans votre navigateur): "
-            +"<br/><a href=\""+ENV.domain+"/users/"+ToolConvert.emailToPath(email)+"/"+code+"\">"
-                +""+ENV.domain+"/users/"+ToolConvert.emailToPath(email)+"/"+code
+            +"<br/><a href=\""+ENV.SERVER.domain+"/users/"+ToolConvert.emailToPath(email)+"/"+code+"\">"
+                +""+ENV.SERVER.domain+"/users/"+ToolConvert.emailToPath(email)+"/"+code
             +"</a>"
             +"</p>"
             +"<p>Bon jeu!</p>"

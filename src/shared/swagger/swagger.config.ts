@@ -17,5 +17,5 @@ export const SwaggerConfig = new DocumentBuilder()
         bearerFormat: "Bearer",
         in: 'Header',
         scheme: "Bearer"
-    }, "dorica_access")
+    }, "dorica_user_jwt")
     .build();

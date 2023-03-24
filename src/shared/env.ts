@@ -1,7 +1,9 @@
 export const ENV = {
-    "host" : process.env.HOST ?? process.env.LOCAL_HOST ?? "localhost",
-    "port" : process.env.PORT ?? process.env.LOCAL_PORT ?? 3000,
-    "domain" : "http://localhost:3000",
+    "SERVER" : {
+        "host" : process.env.HOST ?? process.env.LOCAL_HOST ?? "localhost",
+        "port" : process.env.PORT ?? process.env.LOCAL_PORT ?? 3000,
+        "domain" : "http://localhost:3000",
+    },
     "DB" : {
         "host": process.env.DB_HOST ?? process.env.LOCAL_DB_HOST ?? "127.0.0.1",
         "port": parseInt(process.env.DB_PORT ?? process.env.LOCAL_DB_PORT ?? "3306", 10),
@@ -9,8 +11,8 @@ export const ENV = {
         "password": process.env.DB_PASSWORD ?? process.env.LOCAL_DB_PASSWORD ?? "dorica",
         "database": process.env.DB_NAME ?? process.env.LOCAL_DB_NAME ?? "dorica"
     },
-    "JWT" : {
-        "user" : process.env.JWT_SECRET_KEY_USER
+    "KEY" : {
+        "user" : process.env.KEY_SECRET_USER_JWT ?? "untokenpourlesgouvernertous"
     },
     "MAIL" : {
         "SMTP" : {

@@ -2,17 +2,25 @@
 [:books: Documentation officielle : www.nestjs.com](https://docs.nestjs.com/)
 1. [Initialisation](#1-initialisation)
     1. [Création](#11-création-projet)
-    2. [Git](#12-gitt)
+    2. [Git](#12-git)
     3. [.env](#13-env)
     4. [DB](#14-connexion-db-typeorm)
         1. [MySQL](#141-mysql)
     5. [Swagger](#15-swagger)
-2. [Users|Clients](#2-usersclients)
-    1. [Module](#21-module)
-3. [Outils](#3-outils)
-    1. [Mailer](#31-mailer)
+2. [Users|Clients](#2-users)
+    1. [Models](#21-models)
+        1. [Entities](#211-entity)
+        2. [DTO](#212-dto)
+    2. [Module](#22-module)
+        1. [Controller](#221-controller)
+        2. [Service](#222-service)
+3. [Middleware](#3-middlewares)
+    1. [Authentification](#31-authentification)
+4. [Outils](#4-outils)
+    1. [Mailer](#41-mailer)
 
 [:top: Remonter](#nestjs)
+# 1. Initialisation
 ## 1.1. Création projet
 1. `ctrl`+`ù` : terminal
 2. `npm i -g @nestjs/cli`
@@ -85,8 +93,19 @@
     2. utiliser le service pour retrouner chaque méthode
 6. ajouter les décorateurs Swagger (`@ApiOperation()`, `@ApiResponses()`, ...)
 ### 2.2.2. Service
-# 3. Outils
-## 3.1. Mailer
+
+# 3. Middlewares
+## 3.1. Authentification
+[:books: Documentation](https://docs.nestjs.com/security/authentication)
+1. `npm i --save @nestjs/passport passport passport-local`
+2. `npm i --save-dev @types/passport-local` identification par login/password
+3. `npm i --save @nestjs/jwt passport-jwt`
+4. `npm i --save-dev @types/passport-jwt`
+5. `nest g module middlewares/auth`
+6. `nest g service middlewares/auth`
+
+# 4. Outils
+## 4.1. Mailer
 1. `npm i --save @nestjs-modules/mailer nodemailer`
 2. `npm i --save pug` 
     * ou `npm i --save handlebars` 
