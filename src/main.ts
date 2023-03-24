@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config/dist';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger/dist';
 import { AppModule } from './app.module';
@@ -11,6 +12,7 @@ async function bootstrap() {
   SwaggerModule.setup('', app, document);
 
   console.log("test", ENV.KEY.user);
+  console.log("test", new ConfigService().get('LOCAL_PORT'));
   console.log("http://localhost:"+ENV.SERVER.port);
   console.log("Documentation swagger.json : http://localhost:"+ENV.SERVER.port+"/-json");
 

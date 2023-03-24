@@ -36,6 +36,7 @@
 2. dans `doric-api/.gitignore`, ajouter `.env`
 3. créer un dossier `src/shared`
 4. dans le précédent dossier, créer un fichier `env.ts`
+5. `npm i --save @nestjs/config`
 ## 1.4. Connexion DB TypeORM
 [:books: Documentation](https://typeorm.io/)
 1. [MySQL](#141-mysql)

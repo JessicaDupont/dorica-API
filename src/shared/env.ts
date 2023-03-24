@@ -1,3 +1,46 @@
+import { ConfigService } from "@nestjs/config"
+
+// const configS = new ConfigService();
+export class ENV_CLASS{
+    constructor(
+        private configS: ConfigService
+    ){}
+    SERVER = {
+        "host" :  this.configS.get('HOST') ?? this.configS.get('LOCAL_HOST'),
+        "port" :  this.configS.get('PORT') ?? this.configS.get('LOCAL_PORT'),
+        "domain" : "http://localhost:3000",
+    };
+    DB = {
+        "host": this.configS.get('DB_HOST') ?? this.configS.get('LOCAL_DB_HOST'),
+        "port": parseInt(this.configS.get('DB_PORT') ?? this.configS.get('LOCAL_DB_PORT'), 10),
+        "username": this.configS.get('DB_USERNAME') ?? this.configS.get('LOCAL_DB_USERNAME'),
+        "password": this.configS.get('DB_PASSWORD') ?? this.configS.get('LOCAL_DB_PASSWORD'),
+        "database": this.configS.get('DB_NAME') ?? this.configS.get('LOCAL_DB_NAME')
+    };
+    KEY = {
+        "user" : this.configS.get('SECRET_KEY_USER_JWT') ?? "untokenpourlesgouvernertous"
+    };
+    MAIL = {
+        "SMTP" : {
+            "serveur" : this.configS.get('MAIL_SMTP_SERVEUR'),
+            "port" : parseInt(this.configS.get('MAIL_SMTP_PORT_SECURE') ?? this.configS.get('MAIL_SMTP_PORT'), 10)
+        },
+        "IMAP" : {
+            "serveur" : this.configS.get('MAIL_IMAP_SERVEUR') ?? "mail.miss-ica.be",
+            "port" : parseInt(this.configS.get('MAIL_IMAP_PORT_SECURE') ?? this.configS.get('MAIL_IMAP_PORT'), 10)
+        },
+        "POP3" : {
+            "serveur" : this.configS.get('MAIL_POP3_SERVEUR') ?? "mail.miss-ica.be",
+            "port" : parseInt(this.configS.get('MAIL_POP3_PORT_SECURE') ?? this.configS.get('MAIL_POP3_PORT'), 10)
+        },
+        "USER" : {
+            "NOREPLY" : {
+                "username" : this.configS.get('MAIL_USER_NOREPLY_USERNAME'),
+                "password" : this.configS.get('MAIL_USER_NOREPLY_PASSWORD')
+            }
+        }
+    };
+}
 export const ENV = {
     "SERVER" : {
         "host" : process.env.HOST ?? process.env.LOCAL_HOST ?? "localhost",
@@ -11,8 +54,8 @@ export const ENV = {
         "password": process.env.DB_PASSWORD ?? process.env.LOCAL_DB_PASSWORD ?? "dorica",
         "database": process.env.DB_NAME ?? process.env.LOCAL_DB_NAME ?? "dorica"
     },
-    "KEY" : {
-        "user" : process.env.KEY_SECRET_USER_JWT ?? "untokenpourlesgouvernertous"
+    "KEY" : { 
+        "user" : process.env.SECRET_KEY_USER_JWT ?? "untokenpourlesgouvernertous"
     },
     "MAIL" : {
         "SMTP" : {
